@@ -20,10 +20,10 @@
 <script>
   $(document).ready(function () {
     // Setup - add a text input to each footer cell
-    // $('#data thead th').each(function () {
-    //   var title = $(this).text();
-    //   $(this).append('<br/><input id="filter_' + title + '" type="text" placeholder="Filter ' + title + '">');
-    // });
+    $('#data thead th').each(function () {
+      var title = $(this).text();
+      $(this).append('<div style="padding-right:10px;"><input id="filter_' + title + '" type="text" placeholder="Filter ' + title + '" style="width: 100%;"/></div>');
+    });
 
     $('#data').DataTable({
       autoWidth: false,
@@ -46,8 +46,8 @@
         }
       },
     })
-      // .columns.adjust()
-      // .responsive.recalc()
+      .columns.adjust()
+      .responsive.recalc()
       ;
   });
 </script>

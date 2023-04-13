@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table id="data" class="table-auto">
+<table id="data" class="dataTable compact hover stripe">
   <thead>
     <tr>
       <th>Chrom</th>
@@ -13,37 +13,42 @@
       <th>Consequences</th>
     </tr>
   </thead>
-  {% endblock %}
+</table>
+{% endblock %}
 
-  {% block scripts %}
-  <script>
-    $(document).ready(function () {
-      // Setup - add a text input to each footer cell
-      $('#data thead th').each(function () {
-        var title = $(this).text();
-        $(this).append('<br/><input id="filter_' + title + '" type="text" placeholder="Filter ' + title + '">');
-      });
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    // $('#data thead th').each(function () {
+    //   var title = $(this).text();
+    //   $(this).append('<br/><input id="filter_' + title + '" type="text" placeholder="Filter ' + title + '">');
+    // });
 
-      $('#data').DataTable({
-        autoWidth: true,
-        serverSide: true,
-        columns: [
-          { data: 'chr' },
-          { data: 'pos' },
-          { data: 'alt' },
-          { data: 'ref' },
-          { data: 'qual' },
-          { data: 'impacts' },
-          { data: 'consequences' },
-        ],
-        ajax: {
-          "url": "/api/data",
-          "type": "GET",
-          "data": function (data) {
-            data.filter_chrom = $("#filter_Chrom").val();
-          }
-        },
-      });
-    });
-  </script>
-  {% endblock %}
+    $('#data').DataTable({
+      autoWidth: false,
+      responsive: true,
+      serverSide: true,
+      columns: [
+        { data: 'chr' },
+        { data: 'pos' },
+        { data: 'alt' },
+        { data: 'ref' },
+        { data: 'qual' },
+        { data: 'impacts' },
+        { data: 'consequences' },
+      ],
+      ajax: {
+        "url": "/api/data",
+        "type": "GET",
+        "data": function (data) {
+          data.filter_chrom = $("#filter_Chrom").val();
+        }
+      },
+    })
+      // .columns.adjust()
+      // .responsive.recalc()
+      ;
+  });
+</script>
+{% endblock %}

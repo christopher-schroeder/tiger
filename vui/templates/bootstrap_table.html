@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Chrom</th>
+        <th>Position</th>
+        <th>Alt</th>
+        <th>Ref</th>
+        <th>Qual</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for variant in variants %}
+        <tr>
+          <td>{{ variant.chr }}</td>
+          <td>{{ variant.pos }}</td>
+          <td>{{ variant.alt }}</td>
+          <td>{{ variant.ref }}</td>
+          <td>{{ variant.qual }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable();
+    });
+  </script>
+{% endblock %}
